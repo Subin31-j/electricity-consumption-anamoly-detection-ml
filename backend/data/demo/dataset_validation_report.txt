@@ -1,0 +1,108 @@
+========================================================================
+ECAD DEMO DATASET VALIDATION REPORT  (DEMO / PROTOTYPE DATA)
+========================================================================
+
+Consumer:      10023456781  (Demo Consumer 1)
+Profile:       normal_household - Normal household: morning rise, moderate evening peak, low nights
+Records:       8,784
+Normal:        8,476
+Anomalies:     308
+Anomaly rate:  3.51%
+Average:       1.11 kWh
+Median:        1.02 kWh
+Std dev:       0.77 kWh
+Peak:          13.02 kWh
+Minimum:       0.04 kWh
+Normal mean:   1.05 kWh   |   Anomaly mean: 2.85 kWh
+Date range:    2024-01-01 -> 2024-12-31
+Event types:   burst=26, drop=48, offpeak_high=36, spike=88
+Anomalies/mo:  01:26 02:29 03:29 04:27 05:34 06:20 07:20 08:24 09:23 10:20 11:22 12:34
+Checks:        PASS
+
+Consumer:      10023456782  (Demo Consumer 2)
+Profile:       high_consumption - Higher-consumption household: strong regular peaks, occasional abnormal spikes
+Records:       8,784
+Normal:        8,386
+Anomalies:     398
+Anomaly rate:  4.53%
+Average:       3.14 kWh
+Median:        2.97 kWh
+Std dev:       1.95 kWh
+Peak:          31.18 kWh
+Minimum:       0.10 kWh
+Normal mean:   2.95 kWh   |   Anomaly mean: 7.01 kWh
+Date range:    2024-01-01 -> 2024-12-31
+Event types:   burst=54, drop=32, peak_low=17, spike=92
+Anomalies/mo:  01:28 02:57 03:29 04:23 05:27 06:32 07:28 08:23 09:38 10:40 11:41 12:32
+Checks:        PASS
+
+Consumer:      10023456783  (Demo Consumer 3)
+Profile:       night_irregular - Normal daytime pattern with occasional unusual night-time usage
+Records:       8,784
+Normal:        8,433
+Anomalies:     351
+Anomaly rate:  4.00%
+Average:       1.40 kWh
+Median:        1.25 kWh
+Std dev:       0.95 kWh
+Peak:          14.40 kWh
+Minimum:       0.05 kWh
+Normal mean:   1.28 kWh   |   Anomaly mean: 4.34 kWh
+Date range:    2024-01-01 -> 2024-12-31
+Event types:   drop=21, night_surge=127, offpeak_high=41, spike=23
+Anomalies/mo:  01:29 02:33 03:24 04:23 05:24 06:31 07:34 08:33 09:28 10:30 11:35 12:27
+Checks:        PASS
+
+Consumer:      10023456784  (Demo Consumer 4)
+Profile:       seasonal - Pronounced but normal seasonal variation with limited anomalies
+Records:       8,784
+Normal:        8,484
+Anomalies:     300
+Anomaly rate:  3.42%
+Average:       1.71 kWh
+Median:        1.51 kWh
+Std dev:       1.19 kWh
+Peak:          24.27 kWh
+Minimum:       0.06 kWh
+Normal mean:   1.65 kWh   |   Anomaly mean: 3.41 kWh
+Date range:    2024-01-01 -> 2024-12-31
+Event types:   burst=28, drop=46, peak_low=22, spike=88
+Anomalies/mo:  01:23 02:28 03:20 04:30 05:28 06:27 07:24 08:27 09:16 10:23 11:35 12:19
+Checks:        PASS
+
+Consumer:      10023456785  (Demo Consumer 5)
+Profile:       mixed_abnormal - Mostly normal with a mixture of spikes, drops and time-based events
+Records:       8,784
+Normal:        8,213
+Anomalies:     571
+Anomaly rate:  6.50%
+Average:       2.16 kWh
+Median:        2.00 kWh
+Std dev:       1.44 kWh
+Peak:          19.83 kWh
+Minimum:       0.07 kWh
+Normal mean:   1.98 kWh   |   Anomaly mean: 4.71 kWh
+Date range:    2024-01-01 -> 2024-12-31
+Event types:   burst=49, drop=56, night_surge=50, offpeak_high=28, peak_low=37, spike=70
+Anomalies/mo:  01:47 02:64 03:42 04:61 05:46 06:49 07:39 08:50 09:33 10:45 11:46 12:49
+Checks:        PASS
+
+------------------------------------------------------------------------
+OVERALL SUMMARY
+------------------------------------------------------------------------
+Consumers:      5
+Total records:  43,920
+Normal:         41,992  (95.61%)
+Anomalies:      1,928  (4.39%)
+Average:        1.90 kWh
+Range:          0.04 - 31.18 kWh
+Date range:     2024-01-01 -> 2024-12-31
+
+VALIDATION: ALL CHECKS PASSED
+   - Five unique 11-digit demo consumer numbers
+   - Legacy numbers 91000000001-91000000005 NOT reused
+   - Contiguous hourly timestamps, no duplicates, no gaps
+   - No negative or missing consumption values
+   - Anomaly share within 3.0-10.0% for every consumer (majority of records are NORMAL)
+
+NOTE: ground_truth_anomaly exists only in these generated CSV files for validation. It is not stored in the database and is not an ML input feature, so Isolation Forest / K-Means / LOF detect anomalies independently.

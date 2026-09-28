@@ -1,0 +1,305 @@
+/* =====================================================================
+   ECAD Home hero - light, academic ML product look
+   ===================================================================== */
+.home-hero {
+  position: relative;
+  overflow: hidden;
+  /* Height follows the content - no forced viewport height or empty bands. */
+  display: flex;
+  align-items: center;
+  padding: 32px 0 40px;
+  background:
+    radial-gradient(900px 520px at 10% 5%, rgba(59, 130, 246, 0.13), transparent 65%),
+    radial-gradient(820px 560px at 96% 30%, rgba(34, 211, 238, 0.13), transparent 65%),
+    linear-gradient(180deg, #eff3fc 0%, #f3f6fc 65%, #f6f8fc 100%);
+}
+
+.home-hero-inner {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 60px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr);
+  gap: 64px;
+  align-items: start;
+}
+
+/* Card sits just below the pill line so both columns start near the nav. */
+.home-hero-inner > .home-card { margin-top: 8px; }
+
+.home-hero-copy { min-width: 0; }
+
+/* pill */
+.home-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 15px;
+  border-radius: var(--r-pill);
+  background: #fff;
+  border: 1px solid #d9e4f2;
+  color: #0ea5c6;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+/* heading */
+.home-hero-copy h1 {
+  margin: 24px 0 22px;
+  font-size: clamp(2.4rem, 3.9vw, 4.1rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+  color: #0f1b33;
+}
+
+.home-hero-copy h1 span { display: block; }
+
+.home-lead {
+  max-width: 640px;
+  margin: 0 0 34px;
+  font-size: clamp(1rem, 1.25vw, 1.2rem);
+  line-height: 1.6;
+  color: #5b6b84;
+}
+
+/* buttons */
+.home-actions { display: flex; flex-wrap: wrap; gap: 16px; }
+
+.home-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 60px;
+  padding: 0 30px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: background var(--t-fast), border-color var(--t-fast), box-shadow var(--t-med) var(--ease), transform var(--t-fast);
+}
+
+.home-btn:hover { text-decoration: none; }
+.home-btn:active { transform: translateY(1px); }
+
+.home-btn-primary {
+  min-width: 200px;
+  background: #2563eb;
+  color: #fff;
+  box-shadow: 0 12px 26px -12px rgba(37, 99, 235, 0.75);
+}
+
+.home-btn-primary:hover { background: #1d4ed8; color: #fff; box-shadow: 0 14px 30px -12px rgba(37, 99, 235, 0.85); }
+
+.home-btn-light {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid #d3dcea;
+  color: #0f1b33;
+}
+
+.home-btn-light:hover { background: #fff; border-color: #b8c6db; color: #0f1b33; }
+
+/* process pills */
+.home-steps {
+  list-style: none;
+  margin: 40px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.home-steps li { display: inline-flex; align-items: center; gap: 10px; }
+
+.home-step {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: var(--r-pill);
+  background: #fff;
+  border: 1px dashed #cdd8e7;
+  color: #5b6b84;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.home-steps li.is-final .home-step {
+  border: 1px solid #22b8d6;
+  background: #f0fbfe;
+  color: #0ea5c6;
+}
+
+.home-step-arrow { color: #94a3b8; flex-shrink: 0; }
+
+/* analytics card */
+.home-card {
+  margin: 0;
+  min-width: 0;
+  padding: 26px 28px 24px;
+  border-radius: 20px;
+  background: #fff;
+  border: 1px solid #e6ecf5;
+  box-shadow: 0 28px 60px -28px rgba(30, 64, 140, 0.28), 0 2px 6px rgba(15, 23, 42, 0.04);
+}
+
+.home-card-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.home-card-head strong { font-size: 0.95rem; font-weight: 700; color: #0f1b33; }
+
+.home-card-badge {
+  flex-shrink: 0;
+  padding: 4px 12px;
+  border-radius: var(--r-pill);
+  background: #eef2f8;
+  border: 1px solid #e0e7f1;
+  color: #475569;
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+.home-chart { display: block; width: 100%; height: auto; margin: 20px 0 14px; overflow: visible; }
+
+.home-legend { display: flex; flex-wrap: wrap; gap: 20px; font-size: 0.78rem; color: #64748b; }
+.home-legend span { display: inline-flex; align-items: center; gap: 7px; }
+.home-legend i { width: 8px; height: 8px; border-radius: 50%; }
+.home-legend i.is-normal { background: #2563eb; }
+.home-legend i.is-flag { background: #ef4444; }
+
+.home-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin: 18px 0 0;
+  padding-top: 18px;
+  border-top: 1px solid #e8edf5;
+}
+
+.home-metrics dt { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #64748b; }
+.home-metrics dd { margin: 4px 0 0; font-size: 1.05rem; font-weight: 800; color: #0f1b33; }
+
+/* ---------- Hero entrance (on load) ---------- */
+.home-hero-copy > * { animation: fade-up 640ms var(--ease) both; }
+.home-hero-copy > :nth-child(2) { animation-delay: 70ms; }
+.home-hero-copy > :nth-child(3) { animation-delay: 140ms; }
+.home-hero-copy > :nth-child(4) { animation-delay: 210ms; }
+.home-hero-copy > :nth-child(5) { animation-delay: 280ms; }
+.home-card { animation: hero-card-in 800ms var(--ease) 160ms both; }
+
+@keyframes hero-card-in {
+  from { opacity: 0; transform: translateY(24px) scale(0.97); }
+  to { opacity: 1; transform: none; }
+}
+
+/* chart draws itself, then the flagged points pop in */
+.home-chart-line { stroke-dasharray: 1; stroke-dashoffset: 0; animation: chart-draw 1.6s var(--ease) 500ms both; }
+.home-chart-flag { transform-box: fill-box; transform-origin: center; animation: flag-pop 520ms cubic-bezier(0.3, 1.6, 0.5, 1) both; }
+.home-chart-flag:nth-of-type(1) { animation-delay: 1.35s; }
+.home-chart-flag:nth-of-type(2) { animation-delay: 1.7s; }
+.home-chart-flag circle:first-child { animation: flag-halo 2.4s ease-in-out 2.2s infinite; transform-box: fill-box; transform-origin: center; }
+
+@keyframes chart-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes flag-pop { from { opacity: 0; transform: scale(0); } to { opacity: 1; transform: scale(1); } }
+@keyframes flag-halo { 0%, 100% { transform: scale(1); opacity: 0.2; } 50% { transform: scale(1.7); opacity: 0.05; } }
+
+/* ---------- Scroll reveal (applied by useScrollReveal) ---------- */
+/*
+ * One-shot keyframes with `backwards` fill: the start state holds during the
+ * stagger delay, and once finished the element returns to its normal styles,
+ * so hover transforms keep working without delay.
+ */
+.reveal-ready [data-reveal]:not([data-revealed]) { opacity: 0; }
+.reveal-ready [data-reveal][data-revealed] {
+  animation: reveal-in 720ms var(--ease) var(--reveal-delay, 0ms) backwards;
+}
+
+@keyframes reveal-in {
+  from { opacity: 0; transform: var(--reveal-from, translateY(32px)); }
+  to { opacity: 1; transform: none; }
+}
+
+.landing-head[data-reveal] { --reveal-from: translateY(20px); }
+.landing-model[data-reveal] { --reveal-from: translateY(36px) scale(0.95); }
+.feature[data-reveal] { --reveal-from: translateY(24px) scale(0.97); }
+.demo-grid > [data-reveal]:first-child { --reveal-from: translateX(-40px); }
+.demo-grid > [data-reveal]:last-child { --reveal-from: translateX(40px) rotate(1.5deg); }
+.future-arch[data-reveal] { --reveal-from: translateY(28px) scale(0.98); }
+.cta-inner > [data-reveal] { --reveal-from: translateY(18px); }
+.flow-item[data-reveal] { --reveal-from: translateY(18px) scale(0.85); }
+
+/* pipeline connector grows toward the next node after its node lands */
+.reveal-ready .flow-item[data-revealed] .flow-link {
+  transform-origin: left center;
+  animation:
+    link-grow 600ms var(--ease) calc(var(--reveal-delay, 0ms) + 320ms) backwards,
+    flow-move 1.2s linear infinite;
+}
+.reveal-ready .flow-item:not([data-revealed]) .flow-link { transform: scaleX(0); }
+@keyframes link-grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes link-grow-v { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+
+@media (max-width: 760px) {
+  /* stacked pipeline: connectors are vertical */
+  .reveal-ready .flow-item[data-revealed] .flow-link {
+    transform-origin: top center;
+    animation: link-grow-v 500ms var(--ease) calc(var(--reveal-delay, 0ms) + 280ms) backwards;
+  }
+  .reveal-ready .flow-item:not([data-revealed]) .flow-link { transform: scaleY(0); }
+}
+
+/* step cards: icon spins in after the card lands */
+.reveal-ready .step[data-revealed] .step-icon { animation: icon-spin 620ms cubic-bezier(0.3, 1.5, 0.5, 1) calc(var(--reveal-delay, 0ms) + 250ms) backwards; }
+@keyframes icon-spin { from { transform: scale(0.4) rotate(-90deg); opacity: 0; } to { transform: none; opacity: 1; } }
+
+/* demo card: digit boxes fill one by one once visible */
+.reveal-ready .demo-card[data-revealed] .demo-digits span { animation: digit-fill 420ms var(--ease) calc(400ms + var(--i, 0) * 60ms) both; }
+@keyframes digit-fill {
+  from { opacity: 0; transform: translateY(8px) scale(0.8); }
+  to { opacity: 1; transform: none; }
+}
+
+/* anchors land below the sticky header */
+.landing-section { scroll-margin-top: 76px; }
+
+/* ---------- Compact section rhythm (landing only) ---------- */
+.landing .landing-section { padding: 48px 0; }
+.landing .landing-head { margin-bottom: 28px; }
+.landing .landing-head h2 { margin: 6px 0 8px; }
+.landing .demo-grid { gap: 40px; }
+.landing .future-arch { padding: 32px 24px 24px; }
+.landing .landing-cta { padding: 40px 0; }
+/* Demo and Future share the same light background - avoid a doubled gap between them. */
+.landing #demo { padding-bottom: 24px; }
+.landing #future { padding-top: 24px; }
+
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1180px) {
+  .home-hero-inner { padding: 0 32px; gap: 40px; }
+}
+
+@media (max-width: 1024px) {
+  .home-hero { min-height: 0; padding: 28px 0 48px; }
+  .home-hero-inner > .home-card { margin-top: 0; }
+  .home-hero-inner { grid-template-columns: 1fr; gap: 48px; }
+  .home-card { max-width: 680px; }
+}
+
+@media (max-width: 640px) {
+  .home-hero { padding: 20px 0 40px; }
+  .landing .landing-section { padding: 40px 0; }
+  .landing .landing-head { margin-bottom: 20px; }
+  .landing .landing-cta { padding: 32px 0; }
+  .home-hero-inner { padding: 0 20px; }
+  .home-actions { flex-direction: column; }
+  .home-btn { width: 100%; height: 54px; }
+  .home-steps { gap: 8px; }
+  .home-steps li { gap: 8px; }
+  .home-card { padding: 20px 18px; }
+  .home-card-head strong { font-size: 0.88rem; }
+  .home-metrics dd { font-size: 0.95rem; }
+}

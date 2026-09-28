@@ -1,0 +1,65 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: ecad_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-ecad}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-ecad_password}
+      POSTGRES_DB: ${POSTGRES_DB:-ecad}
+    ports:
+      - "5432:5432"
+    volumes:
+      - ecad_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-ecad} -d ${POSTGRES_DB:-ecad}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: ecad_backend
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql+psycopg2://${POSTGRES_USER:-ecad}:${POSTGRES_PASSWORD:-ecad_password}@postgres:5432/${POSTGRES_DB:-ecad}
+      JWT_SECRET: ${JWT_SECRET:-change_me_in_production}
+      JWT_ALGORITHM: ${JWT_ALGORITHM:-HS256}
+      ACCESS_TOKEN_EXPIRE_MINUTES: ${ACCESS_TOKEN_EXPIRE_MINUTES:-1440}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-admin.subin@gmail.com}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-subadmin@31}
+      ADMIN_NAME: ${ADMIN_NAME:-System Administrator}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:5173}
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+    command: >
+      sh -c "alembic upgrade head &&
+             python -m scripts.seed_demo_consumers &&
+             uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: ecad_frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    environment:
+      VITE_API_BASE_URL: ${VITE_API_BASE_URL:-http://localhost:8000}
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    command: sh -c "npm install && npm run dev -- --host 0.0.0.0 --port 5173"
+
+volumes:
+  ecad_pgdata:
