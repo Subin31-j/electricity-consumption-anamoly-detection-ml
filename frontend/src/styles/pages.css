@@ -696,3 +696,68 @@
 .faq-item.is-open button svg { transform: rotate(180deg); color: var(--blue-600); }
 .faq-item.is-open { border-color: var(--blue-100); box-shadow: var(--shadow-xs); }
 .faq-item [role='region'] p { margin: 0; padding: 0 var(--sp-4) var(--sp-4); font-size: var(--fs-sm); color: var(--text-muted); }
+
+/* =====================================================================
+   Visualizations page — compact density + chart download control
+   ===================================================================== */
+
+/* Wrapper around each chart's plot area; also the capture target for export. */
+.chart-capture { min-width: 0; }
+
+/* Icon-only download button in a chart card header. */
+.chart-dl { color: var(--text-muted); }
+.chart-dl:hover:not(:disabled) { color: var(--blue-600); border-color: var(--border-strong); }
+
+/* ---- Compact density -------------------------------------------------
+   Applied via `.viz-compact` on the page root so other pages that reuse
+   the same chart components keep the roomier default spacing. */
+.viz-compact .page-header { margin-bottom: var(--sp-4); }
+.viz-compact .page-header h1 { font-size: 1.3rem; }
+.viz-compact .page-header-sub { margin-top: 4px; font-size: var(--fs-sm); }
+.viz-compact .page-eyebrow { margin-bottom: 4px; }
+
+.viz-compact .analysis-nav { margin-bottom: var(--sp-4); }
+.viz-compact .analysis-nav-link { padding: 8px 12px; font-size: var(--fs-xs); }
+
+/* Explicit columns rather than auto-fit: auto-fit leaves a dead gap beside a
+   lone trailing card. Columns are fixed per breakpoint and any odd trailing
+   card stretches across the row, so a chart is never left half-wide. */
+.viz-compact .chart-grid {
+  grid-template-columns: 1fr;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-3);
+}
+
+.viz-compact .viz-row { margin-bottom: var(--sp-3); }
+
+@media (min-width: 760px) {
+  .viz-compact .chart-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .viz-compact .chart-grid > :last-child:nth-child(odd) { grid-column: 1 / -1; }
+}
+
+/* Charts in a row share the row height so their card edges line up, and the
+   plot sits centred in whatever space the tallest sibling defines. */
+.viz-compact .chart-grid > .ui-card { display: flex; flex-direction: column; }
+.viz-compact .chart-grid > .ui-card > .ui-card-body { flex: 1; display: flex; flex-direction: column; }
+.viz-compact .chart-grid > .ui-card > .ui-card-body > .chart-capture {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.viz-compact .ui-card-header { padding: var(--sp-3) var(--sp-4) 0; gap: var(--sp-2); }
+.viz-compact .ui-card-body { padding: var(--sp-2) var(--sp-4) var(--sp-3); }
+.viz-compact .ui-card-icon { width: 26px; height: 26px; border-radius: 7px; }
+.viz-compact .ui-card-header h3 { font-size: 0.9rem; }
+.viz-compact .ui-card-subtitle { margin-top: 1px; font-size: 0.7rem; }
+.viz-compact .ui-card-heading { gap: var(--sp-2); }
+
+.viz-compact .chart-legend { gap: var(--sp-3); font-size: 0.7rem; }
+.viz-compact .chart-empty { height: 150px; }
+.viz-compact .donut-center strong { font-size: 1.15rem; }
+
+@media (max-width: 720px) {
+  .viz-compact .ui-card-header { padding: var(--sp-3) var(--sp-3) 0; }
+  .viz-compact .ui-card-body { padding: var(--sp-2) var(--sp-3) var(--sp-3); }
+}

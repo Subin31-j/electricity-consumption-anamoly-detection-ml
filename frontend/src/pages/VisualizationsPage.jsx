@@ -60,46 +60,56 @@ export default function VisualizationsPage() {
   const show = (v) => view === 'all' || view === v;
   const trend = charts.consumption_trend;
 
+  // Every chart on this page renders at the compact density and offers an
+  // image download from its header.
+  const chartProps = { compact: true, downloadable: true };
+
   return (
-    <div className="page">
+    <div className="page viz-compact">
       <PageHeader
         eyebrow={`Analysis #${analysisId}`}
         eyebrowIcon="chartBar"
         title="Visualizations"
         subtitle="An analytics workspace for consumption trends, usage patterns and detected anomalies."
-        actions={<Tabs options={VIEWS} value={view} onChange={setView} label="Chart group" size="lg" />}
+        actions={<Tabs options={VIEWS} value={view} onChange={setView} label="Chart group" />}
       />
       <AnalysisNav analysisId={analysisId} />
 
       {show('consumption') && (
-        <div className="mb-5">
-          <ConsumptionTrendChart data={trend} anomalies={anomalies?.items} />
+        <div className="viz-row">
+          <ConsumptionTrendChart data={trend} anomalies={anomalies?.items} {...chartProps} />
         </div>
       )}
 
       {show('patterns') && (
-        <div className="chart-grid">
-          <HourlyPatternChart data={charts.hourly_pattern} />
-          <DailyTrendChart data={charts.daily_trend} />
-          <MonthlyTrendChart data={charts.monthly_trend} />
-        </div>
+        <>
+          {/* The two categorical charts pair up; the daily series is a long
+              time axis, so it takes the full width on its own row. */}
+          <div className="chart-grid">
+            <HourlyPatternChart data={charts.hourly_pattern} {...chartProps} />
+            <MonthlyTrendChart data={charts.monthly_trend} {...chartProps} />
+          </div>
+          <div className="viz-row">
+            <DailyTrendChart data={charts.daily_trend} {...chartProps} />
+          </div>
+        </>
       )}
 
       {show('anomalies') && (
         <>
           <div className="chart-grid">
-            <NormalVsAnomalyChart data={charts.normal_vs_anomaly} />
-            <AnomalyTimelineChart data={charts.anomaly_timeline} />
+            <NormalVsAnomalyChart data={charts.normal_vs_anomaly} {...chartProps} />
+            <AnomalyTimelineChart data={charts.anomaly_timeline} {...chartProps} />
           </div>
-          <div className="mb-5">
+          <div className="viz-row">
             <AnomalyTimeline items={charts.anomaly_timeline} start={trend?.[0]?.timestamp} end={trend?.[trend.length - 1]?.timestamp} listLimit={4} />
           </div>
         </>
       )}
 
       {show('models') && (
-        <div className="chart-grid">
-          <ModelComparisonChart data={charts.model_comparison} />
+        <div className="viz-row">
+          <ModelComparisonChart data={charts.model_comparison} {...chartProps} />
         </div>
       )}
     </div>

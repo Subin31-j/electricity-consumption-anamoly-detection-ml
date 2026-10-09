@@ -99,7 +99,15 @@ function tickDate(t) {
  * points, range controls, legend and a rich tooltip (joined with anomaly
  * records to show agreement and model scores when available).
  */
-export function ConsumptionOverview({ trend, anomalies, title = 'Consumption Overview', subtitle, height = 320, extraActions }) {
+export function ConsumptionOverview({
+  trend,
+  anomalies,
+  title = 'Consumption Overview',
+  subtitle,
+  height = 320,
+  extraActions,
+  downloadable = false,
+}) {
   const gid = useId().replace(/:/g, '');
   const [range, setRange] = useState(getDefaultRange);
   const index = useMemo(() => indexAnomalies(anomalies), [anomalies]);
@@ -116,6 +124,7 @@ export function ConsumptionOverview({ trend, anomalies, title = 'Consumption Ove
         `${filtered.length.toLocaleString()} readings · ${anomalyCount.toLocaleString()} flagged${bucketed ? ' · long series grouped for display, all anomalies kept' : ''}`
       }
       icon="activity"
+      downloadable={downloadable}
       actions={
         <>
           <Tabs options={RANGES} value={range} onChange={setRange} label="Chart time range" />
